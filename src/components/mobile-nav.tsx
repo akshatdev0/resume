@@ -13,9 +13,9 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '/experience', label: 'Experience', icon: Briefcase },
-    { href: '/#testimonials-section', label: 'Testimonials', icon: MessageSquareQuote },
+    { href: '/resume/', label: 'Home', icon: Home },
+    { href: '/resume/experience', label: 'Experience', icon: Briefcase },
+    { href: '/resume/#testimonials-section', label: 'Testimonials', icon: MessageSquareQuote },
   ];
 
   return (
