@@ -48,7 +48,7 @@ const { title = 'Akshat Nigam - Full Stack Developer & Mentor' } = Astro.props;
           <div class="flex items-center gap-4">
             <MobileNav client:load />
             <div class="flex flex-col">
-              <a href="/" class="text-lg font-bold hover:text-primary transition-colors">
+              <a href="/resume/" class="text-lg font-bold hover:text-primary transition-colors">
                 Akshat Nigam
               </a>
               {personalInfo.contact.phone && (
@@ -64,13 +64,13 @@ const { title = 'Akshat Nigam - Full Stack Developer & Mentor' } = Astro.props;
 
           <!-- Desktop Navigation -->
           <nav class="hidden md:flex items-center gap-6">
-            <a href="/" class="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/resume/" class="text-sm font-medium hover:text-primary transition-colors">
               Home
             </a>
-            <a href="/experience" class="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/resume/experience" class="text-sm font-medium hover:text-primary transition-colors">
               Experience
             </a>
-            <a href="/#testimonials-section" class="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/resume/#testimonials-section" class="text-sm font-medium hover:text-primary transition-colors">
               Testimonials
             </a>
           </nav>

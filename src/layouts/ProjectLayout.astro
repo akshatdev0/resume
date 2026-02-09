@@ -25,11 +25,11 @@ const { project, prevProject, nextProject } = Astro.props;
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink href="/resume/">Home</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/experience">Experience</BreadcrumbLink>
+            <BreadcrumbLink href="/resume/experience">Experience</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -136,12 +136,12 @@ const { project, prevProject, nextProject } = Astro.props;
       </div>
       
       <div class="flex gap-4 w-full sm:w-auto">
-        <a href="/experience" class="flex-1 sm:flex-initial">
+        <a href="/resume/experience" class="flex-1 sm:flex-initial">
           <Button variant="secondary" className="w-full">
             All Projects
           </Button>
         </a>
-        <a href="/" class="flex-1 sm:flex-initial">
+        <a href="/resume/" class="flex-1 sm:flex-initial">
           <Button variant="default" className="w-full">
             Home
           </Button>
