@@ -1,0 +1,11 @@
+---
+import ProjectLayout from '@/layouts/ProjectLayout.astro';
+import { getProjectById, getAdjacentProjects } from '@/data/resume-data';
+
+const project = getProjectById('automotive-aftersales-crm');
+if (!project) throw new Error('Project not found');
+
+const { prev, next } = getAdjacentProjects('automotive-aftersales-crm');
+---
+
+<ProjectLayout project={project} prevProject={prev} nextProject={next} />

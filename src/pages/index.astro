@@ -1,0 +1,346 @@
+---
+import MainLayout from '@/layouts/main.astro';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import SkillBadge from '@/components/SkillBadge';
+import { personalInfo, skills, projects, testimonials, skillUrls } from '@/data/resume-data';
+
+const colleagueTestimonials = testimonials.filter((t) => t.type === 'colleague');
+const menteeTestimonials = testimonials.filter((t) => t.type === 'mentee');
+---
+
+<MainLayout title={`${personalInfo.name} - ${personalInfo.title}`}>
+  <div class="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+    
+    <!-- Hero Section -->
+    <section id="hero-section" class="mb-10 md:mb-12">
+      <div class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8 mb-8">
+        <!-- Avatar -->
+        <div class="shrink-0">
+          <img 
+            src="/akshat-nigam-photo.png" 
+            alt="Akshat Nigam" 
+            class="size-24 md:size-32 rounded-full object-cover border-2 border-primary/30"
+          />
+        </div>
+        
+        <!-- Name, Title, and Contact -->
+        <div class="flex-1 text-center lg:text-left">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">{personalInfo.name}</h1>
+          <p class="text-lg md:text-xl text-muted-foreground mb-6">{personalInfo.title}</p>
+          
+          <!-- Contact Buttons -->
+          <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+            {personalInfo.contact.email && (
+              <a href={`mailto:${personalInfo.contact.email}`}>
+                <Button variant="outline">
+                  <svg class="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24">               
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                  Email
+                </Button>
+              </a>
+            )}
+            {personalInfo.contact.phone && (
+              <a href={`tel:${personalInfo.contact.phone}`}>
+                <Button variant="outline">
+                  <svg class="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                  Phone
+                </Button>
+              </a>
+            )}
+            {personalInfo.contact.linkedin && (
+              <a href={personalInfo.contact.linkedin} target="_blank" rel="noopener noreferrer">
+                <Button variant="outline">
+                  <svg class="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                  </svg>
+                  LinkedIn
+                </Button>
+              </a>
+            )}
+            {personalInfo.contact.github && (
+              <a href={personalInfo.contact.github} target="_blank" rel="noopener noreferrer">
+                <Button variant="outline">
+                  <svg class="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                  </svg>
+                  GitHub
+                </Button>
+              </a>
+            )}
+          </div>
+        </div>
+        
+        <!-- Experience Highlight -->
+        <div class="shrink-0 flex items-center">
+          <div class="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-linear-to-br from-primary/10 via-primary/5 to-background border-2 border-primary/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center justify-center size-14 rounded-full bg-primary/20 border-2 border-primary/50">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award-icon lucide-award">
+                <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+                <circle cx="12" cy="8" r="6"/>
+              </svg>
+            </div>
+            <div class="text-left">
+              <div class="text-3xl md:text-4xl font-bold text-primary">13+ Years</div>
+              <div class="text-sm md:text-base text-muted-foreground font-medium">Professional Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Summary -->
+      <Card>
+        <CardContent className="pt-0">
+          <p class="text-xl leading-relaxed text-muted-foreground">
+            Akshat is a highly accomplished <strong class="font-semibold text-foreground bg-muted px-1 py-0.5 rounded">full-stack software engineer with 13+ years of experience in designing, building, scaling and maintaining enterprise-grade web applications</strong>. Adept in technologies including <strong class="font-semibold text-foreground bg-muted px-1 py-0.5 rounded">Java, Spring Boot, Hibernate, TypeScript, React and SQL/No-SQL Databases</strong>, he thrives in fast-paced environments and excels in leading cross-functional teams to deliver <strong class="font-semibold text-foreground bg-muted px-1 py-0.5 rounded">robust, user-centric and high-quality solutions</strong>. His strengths in <strong class="font-semibold text-foreground bg-muted px-1 py-0.5 rounded">cross-functional leadership, technical mentorship, and architecting cloud solutions</strong> enable him to bridge business needs and technical excellence, making him an invaluable asset for organizations seeking quality and innovation.
+          </p>
+        </CardContent>
+      </Card>
+    </section>
+
+    <Separator className="my-8" />
+
+    <!-- Skills Section -->
+    <section id="skills-section" class="mb-8 md:mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Technical Skills</h2>
+      
+      <div class="space-y-5">
+        <!-- Frontend Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">Frontend</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.frontend.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- Backend Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">Backend</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.backend.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- Cloud Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">Cloud</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.cloud.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- AI Development Tools -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">AI Development Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.aiTools.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- DevOps Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">DevOps & QA</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.devops.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- Tools Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">Database & Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.tools.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- Architecture & Design Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">Architecture & Design</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.architecture.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- Leadership & Methodology Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">Leadership & Methodology</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.leadership.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- IoT & Embedded Skills -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2.5">IoT & Embedded</h3>
+          <div class="flex flex-wrap gap-2">
+            {skills.iot.map((skill) => {
+              const skillName = typeof skill === 'string' ? skill : skill.name;
+              const tier = typeof skill === 'string' ? 'familiar' : skill.tier;
+              return (
+                <SkillBadge tier={tier} href={skillUrls[skillName]} skillName={skillName} client:load>
+                  {skillName}
+                </SkillBadge>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Separator className="my-8" />
+
+    <!-- Experience Section -->
+    <section id="experience-section" class="mb-10 md:mb-12">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold">Experience</h2>
+        <a href="/experience">
+          <Button variant="outline" size="sm">View All →</Button>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((project) => (
+          <a href={`/projects/${project.id}`} class="block group h-full">
+            <Card className="hover:shadow-lg hover:border-primary/50 hover:-translate-y-1 transition-all duration-200 py-4 gap-3 cursor-pointer h-full">
+              <CardHeader className="px-4 gap-1">
+                <div class="flex flex-col gap-2">
+                  <h3 class="text-base md:text-lg font-semibold group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <div class="flex flex-col gap-1 text-sm text-muted-foreground">
+                    <span class="font-medium">{project.company}{project.client && ` (${project.client})`}</span>
+                    <span>{project.dateRange}</span>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-3 px-4">
+                <p class="text-sm leading-relaxed">{project.excerpt}</p>
+                
+                <div class="flex flex-wrap gap-1.5">
+                  {project.technologies.map((tech) => (
+                    <Badge variant="outline" className="text-xs">{tech}</Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <Separator className="my-8" />
+
+    <!-- Testimonials Section -->
+    <section id="testimonials-section" class="mb-10 md:mb-12 scroll-mt-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Testimonials</h2>
+      
+      <!-- Colleague Testimonials -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {colleagueTestimonials.map((testimonial) => (
+          <Card className="py-4 gap-3">
+            <CardHeader className="px-4 gap-1">
+              <div class="flex items-start gap-4">
+                <div class="flex-1">
+                  <h3 class="font-semibold text-base">{testimonial.name}</h3>
+                  <p class="text-sm text-muted-foreground">{testimonial.title}</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="px-4">
+              <p class="text-sm leading-relaxed italic">"{testimonial.quote}"</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <!-- Mentee Testimonials -->
+      <h3 class="text-xl md:text-2xl font-bold mb-6">From Mentees</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {menteeTestimonials.map((testimonial) => (
+          <Card className="py-4 gap-3">
+            <CardHeader className="px-4 gap-1">
+              <div class="flex items-start gap-4">
+                <div class="flex-1">
+                  <h3 class="font-semibold text-base">{testimonial.name}</h3>
+                  <p class="text-sm text-muted-foreground">{testimonial.title}</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="px-4">
+              <p class="text-sm leading-relaxed italic">"{testimonial.quote}"</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </section>
+  </div>
+</MainLayout>
